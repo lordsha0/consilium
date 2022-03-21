@@ -87,13 +87,32 @@ def showTasks():
 
 @app.route("/task")
 def newTask():
-    connect = getDataConnection()
+    return render_template("newTask.html")
 
 
 @app.route("/addTask")
 def addTask():
-    return render_template("newTask.html")
+    # if the resquest is the correct method,
+    # proceed with the insertion
+    if request.method == "POST":
+        try:
+            projectName = request.form["name"]
 
+            with getDataConnection() as connect:
+                dbCursor = connect.cursor()
+                dbCursor.execute("INSERT INTO tasks (description, project_id) VALUES (?, ?)", [projectName])
+
+            connect.commit()
+            message = "Project added successfully"
+        except:
+            connect.rollback()
+            message = "Error errupted, creation unsuccessful"
+        finally:
+            connect.close()
+            return render_template("feedback.html", message=message)
+    # else, return an error
+    else:
+        return render_template("feedback.html", message="not a valid request")
 
 @app.route("/deletTask")
 def deletTask():
