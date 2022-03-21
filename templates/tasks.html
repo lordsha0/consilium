@@ -1,47 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section>
-    <p>to do</p>
-    <ul>
-    {% if tasks != None %}
-    {% for t in tasks %}
-        {% if not t[2] and not t[3] %}
-        <li>
-        </li>
+<div class="">
+    <section class="">
+        <p>to do</p>
+        <ul>
+        {% if tasks != None %}
+        {% for t in tasks %}
+            {% if not t[2] and not t[3] %}
+            <li>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>No tasks at hand...</p>
         {% endif %}
-    {% endfor %}
-    </ul>
-    {% else %}
-    <p></p>
-    {% endif %}
-    <a href="/addTask">Create</a>
-</section>
-<section>
-    <p>WIP</p>
-    <ul>
-    {% if tasks != None %}
-    {% for t in tasks %}
-        {% if t[2] %}
-        <li>
-        </li>
+        <a href="/task?project={{projectId}}">Create</a>
+    </section>
+    <section>
+        <p>WIP</p>
+        <ul>
+        {% if tasks != None %}
+        {% for t in tasks %}
+            {% if t[2] %}
+            <li>
+            </li>
+            {% endif %}
+        {% endfor %}
         {% endif %}
-    {% endfor %}
-    {% endif %}
-    </ul>
-</section>
-<section>
-    <p>DONE</p>
-    <ul>
-    {% if tasks != None %}
-    {% for t in tasks %}
-        {% if t[3] %}
-        <li>
-            <div class=""></div>
-        </li>
+        </ul>
+    </section>
+    <section>
+        <p>DONE</p>
+        <ul>
+        {% if tasks != None %}
+        {% for t in tasks %}
+            {% if t[3] %}
+            <li>
+                <div class=""></div>
+            </li>
+            {% endif %}
+        {% endfor %}
         {% endif %}
-    {% endfor %}
-    {% endif %}
-    </ul>
-</section>
+        </ul>
+    </section>
+</div>
 {% endblock %}
