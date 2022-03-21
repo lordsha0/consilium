@@ -82,17 +82,17 @@ def showTasks():
 
     results = dbCursor.execute(sqlString, [projectId]).fetchone()
 
-    return render_template("tasks.html", tasks=results)
+    return render_template("tasks.html", tasks=results, project=projectId)
 
 
 @app.route("/task")
 def newTask():
-    return render_template("newTask.html")
+    connect = getDataConnection()
 
 
 @app.route("/addTask")
 def addTask():
-    connect = getDataConnection()
+    return render_template("newTask.html")
 
 
 @app.route("/deletTask")
