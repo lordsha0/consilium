@@ -78,7 +78,7 @@ def showTasks():
     dbCursor = connect.cursor()
 
     projectId = request.args["project"]
-    sqlString = "SELECT description, done, inPogress WHERE project_id = ?"
+    sqlString = "SELECT description, done, inProgress FROM tasks WHERE project_id = ?"
 
     results = dbCursor.execute(sqlString, [projectId]).fetchone()
 
