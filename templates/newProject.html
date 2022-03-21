@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/addProject" method="post">
+    <label for="name">Name of the project: </label>
+    <input type="text" name="name" id="name">
+    <button type="submit">create</button>
+</form>
+{% endblock %}
