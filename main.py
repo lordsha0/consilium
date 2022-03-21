@@ -87,7 +87,8 @@ def showTasks():
 
 @app.route("/task")
 def newTask():
-    return render_template("newTask.html")
+    projectId = request.args["project"]
+    return render_template("newTask.html", project=projectId)
 
 
 @app.route("/addTask")
