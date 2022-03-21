@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/addTask" method="post">
+    <label for=""></label><textarea name="" id="" cols="30" rows="10"></textarea>
+    <input type="hidden" name="project" value="{{ project }}">
+</form>
+{% endblock %}
