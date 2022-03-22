@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/">back to projects</a>
 <div class="">
+    <p>{{ name }}</p>
     <section class="">
         <p>to do</p>
         <ul>
@@ -9,6 +11,14 @@
         {% for t in tasks %}
             {% if not t[2] and not t[3] %}
             <li>
+                <div class="">
+                    <p> {{ t[1] }} </p>
+                    <div>
+                        <a href="/deletTask?task={{ t[0] }}">delet</a>
+                        <a href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
+                        <a href="/updateTask?task={{ t[0] }}&field=done">done</a>
+                    </div>
+                </div>
             </li>
             {% endif %}
         {% endfor %}
@@ -16,15 +26,22 @@
         {% else %}
         <p>No tasks at hand...</p>
         {% endif %}
-        <a href="/task?project={{projectId}}">Create</a>
+        <a href="/task?project={{ project }}">add new</a>
     </section>
     <section>
         <p>WIP</p>
         <ul>
         {% if tasks != None %}
         {% for t in tasks %}
-            {% if t[2] %}
+            {% if t[3] %}
             <li>
+                <div class="">
+                    <p>{{ t[1] }}</p>
+                    <div>
+                        <a href="/deletTask?task={{ t[0] }}">delet</a>
+                        <a href="/updateTask?task={{ t[0] }}&field=done">done</a>
+                    </div>
+                </div>
             </li>
             {% endif %}
         {% endfor %}
@@ -36,9 +53,17 @@
         <ul>
         {% if tasks != None %}
         {% for t in tasks %}
-            {% if t[3] %}
+            {% if t[2] %}
             <li>
-                <div class=""></div>
+                <div class="">
+                    <p>
+                        {{ t[1] }}
+                    </p>
+                    <div>
+                        <a href="/deletTask?task={{ t[0] }}">delet</a>
+                        <a href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
+                    </div>
+                </div>
             </li>
             {% endif %}
         {% endfor %}
