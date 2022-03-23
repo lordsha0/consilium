@@ -1,0 +1,51 @@
+:root {
+    --accent: #901AC9;
+    --text: #fff;
+    --background: #2A282C;
+    --secondBackground: #C7B3E1;
+}
+
+html {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.taskColumn {
+    
+}
+
+.title__project {
+
+}
+
+.title__task {
+    text-align: center;
+}
+
+.card__project {
+
+}
+
+.card__task {
+
+}
+
+.button {
+    display: block;
+    padding: 10px 0;
+    width: 90px;
+
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button__primary {
+    background-color:  var(--accent);
+    color: var(--text);
+}
+
+.button__secondary {
+    border: solid 1px var(--accent);
+    color: var(--accent);
+}
