@@ -13,9 +13,9 @@
             <li class="card__task">
                 <p class="description"> {{ t[1] }} </p>
                 <div class="menu__task">
-                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
-                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
-                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done">done</a>
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}&project={{ project }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress&project={{ project }}">in progress</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done&project={{ project }}">done</a>
                 </div>
             </li>
             {% endif %}
@@ -35,8 +35,8 @@
             <li class="card__task">
                 <p class="description description__wip">{{ t[1] }}</p>
                 <div class="menu__task">
-                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
-                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done">done</a>
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}&project={{ project }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done&project={{ project }}">done</a>
                 </div>
             </li>
             {% endif %}
@@ -55,8 +55,8 @@
                     {{ t[1] }}
                 </p>
                 <div class="menu__task">
-                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
-                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}&project={{ project }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress&project={{ project }}">in progress</a>
                 </div>
             </li>
             {% endif %}
