@@ -1,6 +1,7 @@
 :root {
     --accent: #901AC9;
     --text: #fff;
+    --invertedText: #2A282C;
     --background: #2A282C;
     --secondBackground: #C7B3E1;
 }
@@ -10,30 +11,72 @@ html {
     color: var(--text);
 }
 
-.taskColumn {
-    
-}
-
 .title__project {
-
+    
 }
 
 .title__task {
     text-align: center;
 }
 
-.card__project {
+.tasks {
 
+}
+
+.taskColumn {
+    
+}
+
+.group__project {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.group__task {
+    display: flex;
+    flex-direction: column;
+}
+
+.card__project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 390px;
+    padding: 10px;
+
+    background-color: var(--secondBackground);
+    border-radius: 3px;
 }
 
 .card__task {
+    background-color: var(--secondBackground);
+    color: var(--invertedText);
+    
+    width: 339px;
 
+    border-radius: 3px;
 }
+
+.link__project {
+    color: var(--invertedText);
+    text-decoration: none;
+}
+
+.link__project:hover {
+    text-decoration: underline;
+}
+
+.description__task {}
+
+.menu__task {}
 
 .button {
     display: block;
     padding: 10px 0;
-    width: 90px;
+    min-width: 90px;
+    max-width: 120px;
 
     border-radius: 6px;
     text-decoration: none;
@@ -46,6 +89,7 @@ html {
 }
 
 .button__secondary {
-    border: solid 1px var(--accent);
+    background-color: var(--secondBackground);
     color: var(--accent);
+    border: solid 2px var(--accent);
 }
