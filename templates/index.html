@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hej</h1>
+<h1 class="title__project">Hej</h1>
 {% if projects == "" %}
 <p>
 You don't have any projects right now, make one 
 </p>
 {% else %}
-<ul>
+<ul class="group__project">
     {% for p in projects %}
-    <li>
-        <a href="/tasks?project={{ p[0] }}"><span>{{ p[1] }}</span></a>  <a href="/deletProject?project={{ p[0] }}">delet</a>
+    <li class="card__project">
+        <a class="link__project" href="/tasks?project={{ p[0] }}"> <  {{ p[1] }} ></a>  <a class="button button__secondary" href="/deletProject?project={{ p[0] }}">delet</a>
     </li>
     {% endfor %}
 </ul>
 {% endif %}
 
-<a href="/project">create</a>
+<a class="button button__primary" href="/project">create</a>
 {% endblock %}
