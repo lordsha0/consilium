@@ -4,6 +4,7 @@
     --invertedText: #2A282C;
     --background: #2A282C;
     --secondBackground: #C7B3E1;
+    --columnBackground: #c7b3e150;
 }
 
 html {
@@ -16,46 +17,67 @@ html {
 }
 
 .title__task {
+    font-size: 26px;
+
     text-align: center;
+    text-decoration: underline;
+    text-transform: lowercase;
 }
 
 .tasks {
-
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .taskColumn {
-    
+    background-color: var(--columnBackground);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 390px;
+    padding: 15px 0;
 }
 
 .group__project {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+
+    list-style: none;
 }
 
 .group__task {
     display: flex;
     flex-direction: column;
+
+    list-style: none;
+
+    margin: 10px 0;
+    padding: 0;
 }
 
 .card__project {
+    background-color: var(--secondBackground);
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     width: 390px;
     padding: 10px;
-
-    background-color: var(--secondBackground);
     border-radius: 3px;
 }
 
 .card__task {
     background-color: var(--secondBackground);
     color: var(--invertedText);
+
+    margin: 15px 0;
+    padding: 10px;
     
     width: 339px;
-
     border-radius: 3px;
 }
 
@@ -68,9 +90,23 @@ html {
     text-decoration: underline;
 }
 
-.description__task {}
+.description {
+    margin: 60px 0;
+    text-align: center;
+}
 
-.menu__task {}
+.description__wip {
+    font-weight: bold;
+}
+
+.description__done{
+    text-decoration: line-through;
+}
+
+.menu__task {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .button {
     display: block;
@@ -93,3 +129,11 @@ html {
     color: var(--accent);
     border: solid 2px var(--accent);
 }
+
+.button__tertiary {
+    background-color: var(--background);
+    color: var(--secondBackground);
+    border: solid 1px var(--secondBackground);
+}
+
+.form {}
