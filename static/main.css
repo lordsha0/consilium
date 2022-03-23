@@ -13,7 +13,9 @@ html {
 }
 
 .title__project {
-    
+    text-align: center;
+    margin-top: 39px;
+    margin-bottom: 90px;
 }
 
 .title__task {
@@ -136,4 +138,25 @@ html {
     border: solid 1px var(--secondBackground);
 }
 
-.form {}
+.form__project {
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;
+    width: 600px;
+    
+    margin: 90px auto;
+}
+
+.form__task {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+
+    margin: 90px auto;
+}
+
+.name__project {
+    width: 50%;
+}
