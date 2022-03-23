@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -13,10 +13,31 @@ def getProjects():
     sqlString = "SELECT id, name FROM projects"
     connect = getDataConnection()
     dbCursor = connect.cursor()
+
     results = dbCursor.execute(sqlString).fetchall()
         
     return results
 
+
+def getTasks(projectId):
+    sqlString =  "SELECT id, description, done, inProgress FROM tasks WHERE project_id = ?"
+    connect = getDataConnection()
+    dbCursor = connect.cursor()
+
+    results = dbCursor.execute(sqlString, [projectId]).fetchall()
+
+    return results
+
+
+def getProjectName(projectId):
+    sqlString = "SELECT name FROM projects WHERE id = ?"
+    connect = getDataConnection()
+    dbCursor = connect.cursor()
+
+    results = dbCursor.execute(sqlString, [projectId]).fetchone()
+
+    return results[0]
+    
 
 @app.route("/")
 def index():
@@ -83,20 +104,16 @@ def showTasks():
     dbCursor = connect.cursor()
 
     projectId = request.args["project"]
-    sqlString = "SELECT id, description, done, inProgress FROM tasks WHERE project_id = ?"
+    results = getTasks(projectId)
+    projectName = getProjectName(projectId)
 
-    results = dbCursor.execute(sqlString, [projectId]).fetchall()
-    
-    sqlString = "SELECT name FROM projects WHERE id = ?"
-    
-    projectName = dbCursor.execute(sqlString, [projectId]).fetchone()
-
-    return render_template("tasks.html", title="tasks | consilium", tasks=results, project=projectId[0], name=projectName[0])
+    return render_template("tasks.html", title="tasks | consilium", tasks=results, project=projectId[0], name=projectName)
 
 
 @app.route("/task")
 def newTask():
     projectId = request.args["project"]
+
     return render_template("newTask.html", title="create a new task | consilium", project=projectId)
 
 
@@ -121,10 +138,11 @@ def addTask():
             message = "Error errupted, creation unsuccessful"
         finally:
             connect.close()
-            return render_template("feedback.html", title=title,  url="/tasks", message=message)
+
+            return redirect(url_for("showTasks", project=projectId))
     # else, return an error
     else:
-        return render_template("feedback.html", title=title, url="/tasks", message="not a valid request")
+        return render_template("feedback.html", title=title, url="/", message="not a valid request")
 
 
 @app.route("/deletTask")
@@ -134,6 +152,7 @@ def deletTask():
     connect = getDataConnection()
     dbCursor = connect.cursor()
     taskId = request.args["task"]
+    projectId = request.args["project"]
 
     try:
         dbCursor.execute("DELETE FROM tasks WHERE id=?", [taskId])   
@@ -145,7 +164,8 @@ def deletTask():
         message = "Error errupted, deletion unsuccessful"
     finally:
         connect.close()
-        return render_template("feedback.html", title=title, url="/tasks", message=message) 
+
+        return redirect(url_for("showTasks", project=projectId))
 
 
 @app.route("/updateTask")
@@ -156,6 +176,7 @@ def updateTask():
     dbCursor = connect.cursor()
     taskId = request.args["task"]
     updatedField = request.args["field"]
+    projectId = request.args["project"]
 
     try:
         if (updatedField == "progress"):
@@ -169,9 +190,9 @@ def updateTask():
         connect.rollback()
         message = "Error errupted, update unsuccessful"
     finally:
-        
         connect.close()
-        return render_template("feedback.html", title=title, url="/tasks", message=message) 
+
+        return redirect(url_for("showTasks", project=projectId))
 
 
 if __name__ == "__main__":
