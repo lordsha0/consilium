@@ -1,23 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/">back to projects</a>
-<div class="">
-    <p>{{ name }}</p>
-    <section class="">
-        <p>to do</p>
-        <ul>
+<a class="button button__secondary" href="/">back to projects</a>
+<p class="title__task">{{ name }}</p>
+<div class="tasks">
+    <section class="taskColumn">
+        <p class="title__task">to do</p>
+        <ul class="group__task">
         {% if tasks != None %}
         {% for t in tasks %}
             {% if not t[2] and not t[3] %}
-            <li>
-                <div class="">
-                    <p> {{ t[1] }} </p>
-                    <div>
-                        <a href="/deletTask?task={{ t[0] }}">delet</a>
-                        <a href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
-                        <a href="/updateTask?task={{ t[0] }}&field=done">done</a>
-                    </div>
+            <li class="card__task">
+                <p class="description"> {{ t[1] }} </p>
+                <div class="menu__task">
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done">done</a>
                 </div>
             </li>
             {% endif %}
@@ -26,21 +24,19 @@
         {% else %}
         <p>No tasks at hand...</p>
         {% endif %}
-        <a href="/task?project={{ project }}">add new</a>
+        <a class="button button__primary" href="/task?project={{ project }}">add new</a>
     </section>
-    <section>
-        <p>WIP</p>
-        <ul>
+    <section class="taskColumn">
+        <p class="title__task">WIP</p>
+        <ul class="group__task">
         {% if tasks != None %}
         {% for t in tasks %}
             {% if t[3] %}
-            <li>
-                <div class="">
-                    <p>{{ t[1] }}</p>
-                    <div>
-                        <a href="/deletTask?task={{ t[0] }}">delet</a>
-                        <a href="/updateTask?task={{ t[0] }}&field=done">done</a>
-                    </div>
+            <li class="card__task">
+                <p class="description description__wip">{{ t[1] }}</p>
+                <div class="menu__task">
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=done">done</a>
                 </div>
             </li>
             {% endif %}
@@ -48,21 +44,19 @@
         {% endif %}
         </ul>
     </section>
-    <section>
-        <p>DONE</p>
-        <ul>
+    <section class="taskColumn">
+        <p class="title__task">DONE</p>
+        <ul class="group__task">
         {% if tasks != None %}
         {% for t in tasks %}
             {% if t[2] %}
-            <li>
-                <div class="">
-                    <p>
-                        {{ t[1] }}
-                    </p>
-                    <div>
-                        <a href="/deletTask?task={{ t[0] }}">delet</a>
-                        <a href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
-                    </div>
+            <li class="card__task">
+                <p class="description description__done">
+                    {{ t[1] }}
+                </p>
+                <div class="menu__task">
+                    <a class="button button__secondary" href="/deletTask?task={{ t[0] }}">delet</a>
+                    <a class="button button__primary" href="/updateTask?task={{ t[0] }}&field=progress">in progress</a>
                 </div>
             </li>
             {% endif %}
