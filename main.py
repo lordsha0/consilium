@@ -87,9 +87,12 @@ def removeProject():
 
     try:
         dbCursor.execute("DELETE FROM projects WHERE id=?", [projectId])   
-
         connect.commit()
-        message = "Project deleted successfully"
+
+        dbCursor.execute("DELETE FROM tasks WHERE project_id = ?", [projectId])
+        connect.commit()
+
+        message = "Project and all bound tasks deleted successfully"
     except:
         connect.rollback()
         message = "Error errupted, deletion unsuccessful"
