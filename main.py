@@ -21,16 +21,18 @@ def getProjects():
 @app.route("/")
 def index():
     results = getProjects()
-    return render_template("index.html", title="consilium", projects=results)
+    return render_template("index.html", title="projects | consilium", projects=results)
 
 
 @app.route("/project")
 def newProject():
-    return render_template("newProject.html")
+    return render_template("newProject.html", title="create a new project | consilium")
 
 
 @app.route("/addProject", methods = ["POST", "GET"])
 def addProject():
+    title = "feedback | consilium"
+
     # if the resquest is the correct method,
     # proceed with the insertion
     if request.method == "POST":
@@ -48,14 +50,16 @@ def addProject():
             message = "Error errupted, creation unsuccessful"
         finally:
             connect.close()
-            return render_template("feedback.html", message=message)
+            return render_template("feedback.html", title=title, url="/", message=message)
     # else, return an error
     else:
-        return render_template("feedback.html", message="not a valid request")
+        return render_template("feedback.html", title=title, url="/", message="not a valid request")
 
 
 @app.route("/deletProject", methods = [ "GET"] )
 def removeProject():
+    title = "feedback | consilium"
+
     connect = getDataConnection()
     dbCursor = connect.cursor()
     projectId = request.args["project"]
@@ -70,7 +74,7 @@ def removeProject():
         message = "Error errupted, deletion unsuccessful"
     finally:
         connect.close()
-        return render_template("feedback.html", message=message)
+        return render_template("feedback.html", title=title, url="/", message=message)
 
 
 @app.route("/tasks", methods = ["GET"])
@@ -87,17 +91,18 @@ def showTasks():
     
     projectName = dbCursor.execute(sqlString, [projectId]).fetchone()
 
-    return render_template("tasks.html", tasks=results, project=projectId[0], name=projectName[0])
+    return render_template("tasks.html", title="tasks | consilium", tasks=results, project=projectId[0], name=projectName[0])
 
 
 @app.route("/task")
 def newTask():
     projectId = request.args["project"]
-    return render_template("newTask.html", project=projectId)
+    return render_template("newTask.html", title="create a new task | consilium", project=projectId)
 
 
 @app.route("/addTask", methods = ["POST", "GET"])
 def addTask():
+    title = "feedback | consilium"
     # if the resquest is the correct method,
     # proceed with the insertion
     if request.method == "POST":
@@ -116,14 +121,16 @@ def addTask():
             message = "Error errupted, creation unsuccessful"
         finally:
             connect.close()
-            return render_template("feedback.html", message=message)
+            return render_template("feedback.html", title=title,  url="/tasks", message=message)
     # else, return an error
     else:
-        return render_template("feedback.html", message="not a valid request")
+        return render_template("feedback.html", title=title, url="/tasks", message="not a valid request")
 
 
 @app.route("/deletTask")
 def deletTask():
+    title = "feedback | consilium"
+
     connect = getDataConnection()
     dbCursor = connect.cursor()
     taskId = request.args["task"]
@@ -138,11 +145,13 @@ def deletTask():
         message = "Error errupted, deletion unsuccessful"
     finally:
         connect.close()
-        return render_template("feedback.html", message=message) 
+        return render_template("feedback.html", title=title, url="/tasks", message=message) 
 
 
 @app.route("/updateTask")
 def updateTask():
+    title = "feedback | consilium"
+
     connect = getDataConnection()
     dbCursor = connect.cursor()
     taskId = request.args["task"]
@@ -160,8 +169,9 @@ def updateTask():
         connect.rollback()
         message = "Error errupted, update unsuccessful"
     finally:
+        
         connect.close()
-        return render_template("feedback.html", message=message)
+        return render_template("feedback.html", title=title, url="/tasks", message=message) 
 
 
 if __name__ == "__main__":
