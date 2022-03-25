@@ -129,7 +129,7 @@ html {
 .button__secondary {
     background-color: var(--secondBackground);
     color: var(--accent);
-    border: solid 2px var(--accent);
+    border: solid 1px var(--accent);
 }
 
 .button__tertiary {
