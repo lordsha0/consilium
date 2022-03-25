@@ -19,7 +19,7 @@ Spin up the project by executing `python3 main.py`
 Either click on the url in your terminal or go to in your browser and type the url yourself c:
 
 ---
-## Configuration ##
+## configuration ##
 
 In the `static/main.css` file, all colors are in the `:root` group at the top of the file. Change them as you desire!
 
