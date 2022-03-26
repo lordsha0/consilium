@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title__project">Hej</h1>
-{% if projects == "" %}
-<p>
-You don't have any projects right now, make one 
-</p>
-{% else %}
-<ul class="group__project">
-    {% for p in projects %}
-    <li class="card__project">
-        <a class="link__project" href="/tasks?project={{ p[0] }}"> <  {{ p[1] }} ></a>  <a class="button button__secondary" href="/deletProject?project={{ p[0] }}">delet</a>
-    </li>
-    {% endfor %}
+<section class="projectColumn">
+    <h1 class="title__project">Hej</h1>
+    {% if projects == "" %}
+    <p>
+    You don't have any projects right now, make one 
+    </p>
+    {% else %}
+    <ul class="group__project">
+        {% for p in projects %}
+        <li class="card__project">
+            <a class="link__project" href="/tasks?project={{ p[0] }}"> <  {{ p[1] }} ></a>  <a class="button button__secondary" href="/deletProject?project={{ p[0] }}">delet</a>
+        </li>
+        {% endfor %}
+    {% endif %}
 </ul>
-{% endif %}
 
 <a class="button button__primary" href="/project">create</a>
+</section>
 {% endblock %}
