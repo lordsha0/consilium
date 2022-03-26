@@ -31,6 +31,12 @@ html {
     justify-content: space-evenly;
 }
 
+.projectColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .taskColumn {
     background-color: var(--columnBackground);
 
@@ -46,6 +52,9 @@ html {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    width: 100%;
+
+    margin-bottom: 90px;
 
     list-style: none;
 }
