@@ -15,7 +15,7 @@ html {
 .title__project {
     text-align: center;
     margin-top: 39px;
-    margin-bottom: 90px;
+    margin-bottom: 60px;
 }
 
 .title__task {
@@ -55,6 +55,7 @@ html {
     width: 100%;
 
     margin-bottom: 90px;
+    padding: 0;
 
     list-style: none;
 }
@@ -78,6 +79,7 @@ html {
 
     width: 390px;
     padding: 10px;
+    margin: 30px 0;
     border-radius: 3px;
 }
 
